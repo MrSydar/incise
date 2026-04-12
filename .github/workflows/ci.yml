@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install shellcheck
+        run: sudo apt-get install -y shellcheck
+
+      - name: ShellCheck
+        run: shellcheck incise.plugin.zsh
+
+      - name: Install zsh
+        run: sudo apt-get install -y zsh
+
+      - name: ZSH syntax check
+        run: zsh -n incise.plugin.zsh
